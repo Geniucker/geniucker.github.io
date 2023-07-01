@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="https://source.geniucker.top/logo/favicon-32x32-next.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Geniucker">
+  <meta name="keywords" content="笔记,技术,随笔">
+  
+    <meta name="description" content="背景 汉明码的背景可以追溯到20世纪50年代，当时数字通信和数据存储技术正在迅速发展。在这个时期，数据传输和存储中的错误是一个普遍存在的问题。由于噪声、干扰、损坏等原因，数据在传输和存储过程中可能会发生错误，这会导致数据的丢失或损坏。为了解决这个问题，人们开始研究纠错码。纠错码是一种编码方案，可以在数据传输和存储过程中检测和纠正错误。汉明码是最早的纠错码之一，它由美国数学家理查德·汉明（Richa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汉明码">
+<meta property="og:url" content="https://blog.geniucker.top/2023/05/05/%E6%B1%89%E6%98%8E%E7%A0%81/index.html">
+<meta property="og:site_name" content="Geniucker&#39;s Blog">
+<meta property="og:description" content="背景 汉明码的背景可以追溯到20世纪50年代，当时数字通信和数据存储技术正在迅速发展。在这个时期，数据传输和存储中的错误是一个普遍存在的问题。由于噪声、干扰、损坏等原因，数据在传输和存储过程中可能会发生错误，这会导致数据的丢失或损坏。为了解决这个问题，人们开始研究纠错码。纠错码是一种编码方案，可以在数据传输和存储过程中检测和纠正错误。汉明码是最早的纠错码之一，它由美国数学家理查德·汉明（Richa">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://source.geniucker.top/image/20230505-1/1.webp">
+<meta property="article:published_time" content="2023-05-05T12:20:40.000Z">
+<meta property="article:modified_time" content="2023-05-05T13:45:00.000Z">
+<meta property="article:author" content="Geniucker">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://source.geniucker.top/image/20230505-1/1.webp">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>汉明码 - Geniucker&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.geniucker.top","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Geniucker&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="汉明码"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Geniucker
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-05 20:20" pubdate>
+          May 5, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          37 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">汉明码</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    Last updated on May 5, 2023 pm
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><blockquote>
+<p>汉明码的背景可以追溯到20世纪50年代，当时数字通信和数据存储技术正在迅速发展。在这个时期，数据传输和存储中的错误是一个普遍存在的问题。由于噪声、干扰、损坏等原因，数据在传输和存储过程中可能会发生错误，这会导致数据的丢失或损坏。<br>为了解决这个问题，人们开始研究纠错码。纠错码是一种编码方案，可以在数据传输和存储过程中检测和纠正错误。汉明码是最早的纠错码之一，它由美国数学家理查德·汉明（Richard Hamming）在20世纪50年代发明。<br>汉明码的主要优点是可以检测并纠正单个比特的错误。这使得它在数字通信和数据存储中得到广泛应用。例如，在计算机内存中，汉明码可以检测和纠正内存中的单个比特错误。在数字通信中，汉明码可以用于检测和纠正传输过程中的单个比特错误。<br>随着技术的不断发展，汉明码也在不断演化和改进。例如，扩展汉明码可以检测和纠正多个比特的错误。在实际应用中，人们还使用其他类型的纠错码，如卷积码和重复码等。这些编码方案都旨在提高数据传输和存储的可靠性和稳定性。 —— GPT 4  </p>
+</blockquote>
+<h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="奇偶校验"><a href="#奇偶校验" class="headerlink" title="奇偶校验"></a>奇偶校验</h3><p>这是一种最简单的判断数据是否正确的办法。最常使用的是偶校验。它使用1-bit额外的数据来保证整个数据的”1”的个数是偶数。我们可以根据收到的数据里的”1”的个数来判断数据是否是正确的。偶校验可以检测出1-bit错误，但不能纠错。  </p>
+<h3 id="汉明距离"><a href="#汉明距离" class="headerlink" title="汉明距离"></a>汉明距离</h3><p>汉明距离是两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。例如：<br>$$<br>\begin{aligned}<br>10{\color{red}1}1{\color{red}1}01\\<br>10{\color{red}0}1{\color{red}0}01<br>\end{aligned}<br>$$<br>之间的汉明距离是2。  </p>
+<h3 id="最小汉明距离"><a href="#最小汉明距离" class="headerlink" title="最小汉明距离"></a>最小汉明距离</h3><p>最小汉明距离是指一个编码中，任意两个码字之间的最小汉明距离。以 2 out of 5 code (用5-bit表示0~9 10个十进制数字，5个bit里面有两个为1) 为例，它的最小汉明距离是2。  </p>
+<h3 id="最小汉明距离与纠错能力"><a href="#最小汉明距离与纠错能力" class="headerlink" title="最小汉明距离与纠错能力"></a>最小汉明距离与纠错能力</h3><h4 id="错误检测"><a href="#错误检测" class="headerlink" title="错误检测"></a>错误检测</h4><p>仍然以 2 out of 5 code 为例，我们先列出所有可能的码字：<br>$$<br>\begin{aligned}<br>00011-&gt;1\\<br>00101-&gt;2\\<br>00110-&gt;3\\<br>01001-&gt;4\\<br>01010-&gt;5\\<br>01100-&gt;6\\<br>10001-&gt;7\\<br>10010-&gt;8\\<br>10100-&gt;9\\<br>11000-&gt;0<br>\end{aligned}<br>$$<br>假如原文为 $00110$，但是在传输的过程中发生了位翻转，收到的码字是 $00111$，那么我们可以知道至少有一个bit发生了错误。因为这并不是一个有效码字。一般地，如果一种编码的最小汉明距离为$d$，则它可以检测出$d-1$位错误。  </p>
+<h4 id="错误纠正"><a href="#错误纠正" class="headerlink" title="错误纠正"></a>错误纠正</h4><p>上述的 2 out of 5 code 不能纠正错误。<br>然而足够多的冗余位可以使我们纠正有限的错误。最简单的例子：<br>要传输的信息是 $01$，在传输时我们将其重复3次 $010101$，这样即使有一位发生了位翻转，我们也可以通过另外两个copy来复原它。<br>Ujjal Bhowmik教授的课件说：  </p>
+<blockquote>
+<p>Given a code word $C$, we can define a neighborhood $N_k(C)$ of distance $k$ around $C$ as the set of bit patterns with Hamming distance ≤ $k$ from $C$. If up to k bits flip in a stored copy of $C$, the final bit pattern falls within $N_k(C)$.<br>Assume that up to $k$ bits flip in a stored bit pattern $C$ to produce a final bit pattern $F$. We know that F is in $N_k(C)$. When can we identify $C$, given only $F$? Only when $N_k(C)$ does not overlap with neighborhood $N_k(D)$ for any other code word $D$.<br>If we want to correct $k$ errors, we need the neighborhoods $N_k(C)$ and $N_k(D)$ to be disjoint for any pair of code words $C$ and $D$.<br>In other words, to correct $k$ errors, the distance between code words must be at least $2k + 1$. But that’s Hamming distance!  </p>
+</blockquote>
+<p>这一段话有点抽象，我尝试用简单一点的语言来解释。<br>先说结论，如果一种编码能够纠正 $k$ 个错误，那么它的最小汉明距离至少为 $2k + 1$。也就是说，最小汉明距离为 $k$ 的编码能够完成至多 $\lfloor\frac{k - 1}{2}\rfloor$的纠错。它的原理大概是这样的：<br>纠正位翻转的过程是无效码字才有效码字的转变，这一个过程实际上是找到了一个最接近接收到的无效码字的有效码字。我们假设一钟编码的最小汉明距离为 $2k$，但是数据在传输过程钟发成了 $k$ 位位翻转，那么它就会有两种相同汉明距离的方式变成有效码字，我们就无法确定应该使用哪一种。再比如，假设一种编码的最小汉明距离位 $2k - 1$，但是数据在传输过程中发生了 $k$ 位位翻转，那么离他最近的有效码字(离他汉明距离为 $k - 1$)并不是它的原码字，所以无法正确纠错。对于最小距离小于$2k - 1$的编码也是如此。  </p>
+<h2 id="汉明码"><a href="#汉明码" class="headerlink" title="汉明码"></a>汉明码</h2><p>汉明码是一种通用、高效且最小汉明距离为3的编码。它提供了一种纠正1-bit错误的简单方法。<br>首先我来介绍如何计算原始数据的汉明码。<br>对于一个 $N$ 位的汉明码：  </p>
+<ol>
+<li>从最低位向最高位分别编号为1~N (注意是从1开始的)  </li>
+<li>使所有第2的幂次位作为校验位，假设为第 P 位<br>接下来我会以(7,4)汉明码(4-bit有效数据，3位校验位)来举例：  </li>
+<li>第 P 位使得所有 使得二进制权为P且该位为1，即(P AND K) &#x3D;&#x3D; P 的第 K 位 成为偶校验。（可能有点抽象，下面会举例）</li>
+</ol>
+<p>假设一个码字为$x_7x_6x_5x_4x_3x_2x_1$，<strong>注意没有</strong> $x_0$，那么校验位为 $x_4$, $x_2$, $x_1$。数据位为 $x_7$, $x_6$, $x_5$, $x_3$。<br>我们把校验位放在一起写成一个二进制数，$x_4x_2x_1$。这个二进制数刚好可以表示0~7。<br>$x_1$使得$x_1$, $x_3$, $x_5$, $x_7$为偶校验。因为二进制权$1&#x3D;2^0，$对应第0位，$x_1$, $x_3$, $x_5$, $x_7$二进制的第0位都是1。<br>$x_2$使得$x_2$, $x_3$, $x_6$, $x_7$为偶校验。因为二进制权$2&#x3D;2^1，$对应第1位，$x_2$, $x_3$, $x_6$, $x_7$二进制的第1位都是1。<br>$x_4$使得$x_4$, $x_5$, $x_6$, $x_7$为偶校验。因为二进制权$4&#x3D;2^2，$对应第2位，$x_4$, $x_5$, $x_6$, $x_7$二进制的第2位都是1。  </p>
+<p>我们来看一个图<br><img src="https://source.geniucker.top/image/20230505-1/1.webp" srcset="/img/loading.gif" lazyload alt="1"><br>如果数据传输没有错误，每个圈都满足偶校验。如果传输过程中有一位发生了位翻转，导致一个或多个圈不满足偶校验，比如红色和黄色圈不满足偶校验而蓝色仍然满足偶校验，那我们就可以得出是第三位发生了位翻转，我们只需要翻转第三位就能得到正确的数据。<br>虽然我们能通过图像找到错误的位并纠正，但是当位数多的时候，我们将难以画出图像，我已我们需要一种代数化的解法。我们注意到，一组数据满足偶校验，他们的异或值为0，反之为1。在上面的图中，重叠部分的数字是所在圈的数字之和。在上一段所说的例子之中，红色圈的异或值为1，黄色圈的异或值为1，蓝色圈的异或值为0。将4, 2, 1作为权重将对应圈的异或值排列成二进制数，即 $011$，也就是十进制3，也就是第三位发生了位翻转。<br>总结一下，我们刚刚事实上算了3个异或：<br>$$<br>\begin{aligned}<br>e_1 &#x3D; x_1 \oplus x_3 \oplus x_5 \oplus x_7\\<br>e_2 &#x3D; x_2 \oplus x_3 \oplus x_6 \oplus x_7\\<br>e_4 &#x3D; x_4 \oplus x_5 \oplus x_6 \oplus x_7<br>\end{aligned}<br>$$<br>那么二进制数 $e_4e_2e_1$ 就是发生位翻转的位数。如果$e_4e_2e_1$为0，说明三个圈都满足偶校验，没有发生位翻转。    </p>
+<p>一般地，为了找到哪一位发生了位翻转，我们只需要计算出上述的每一个 $e_{2^k}$，在排列成二进制数，就能得到发生位翻转的位数。  </p>
+<p>如果还是不能我们是如何定位到位翻转的位数的，我像用一道数学题来说明：  </p>
+<blockquote>
+<p>假设你1000酒，其中一瓶有剧毒，其余没有毒，不论是喝到有毒酒还是含有有毒酒的混合液体都会在喝后一个小时死亡。现在你有10只小白鼠，请问如何只使用一小时找到那瓶有毒的酒？  </p>
+</blockquote>
+<p>解：我们把1000瓶酒从1~1000编号并写成10位二进制，把10只小白鼠从1~10编号。每只小白鼠分别对应二进制的一位。比如小白鼠1对应二进制的第1位，小白鼠2对应二进制的第2位。<br>我们让小白鼠1喝所有二进制第1位为1的酒，小白鼠2喝所有二进制第2位为1的酒，以此类推。<br>1小时后，如果小白鼠1死了，那么有毒酒的二进制第一位一定为1，如果小白鼠2死了，那么有毒酒的二进制第二位一定为1，以此类推。于是我们能够得到有毒酒编号的二进制数。这样我们就能在一个小时的时候找到那瓶有毒的酒。  </p>
+<h2 id="SEC-DED-Code"><a href="#SEC-DED-Code" class="headerlink" title="SEC-DED Code"></a>SEC-DED Code</h2><p>SEC-DED Code (Single Error Correction, Double Error Detection) 是带有奇偶校验的汉明码，是汉明码的一种拓展。它在汉明码的基础上增加了一位奇偶校验位，我们通常使用带有奇校验的汉明码(在汉明码的最高位之前增加奇校验位)。这样，这种编码的最小汉明距离变成了4。它最多能纠正 $\lfloor \frac{4-1}{2} \rfloor &#x3D; 1$ 位错误。但是当发生两位错误时，由于到最近的正确码字的距离为2，有不止一种可能，所以无法纠错。这就能避免原本汉明码在处理两位时候的错误纠错。<br>下面举一个具体的例子：<br>传输前的原始数据为 $1001$，它的带有奇校验的汉明码为 $01001100$。在传输的过程中发生了一位位翻转变成了 $01001000$。为了处理错误，我们先按照正常汉明码的步骤处理它的最低7-bit，得到 $e_4e_2e_1&#x3D;100$，纠正第4位错误后变成 $01001100$，这时再判断最高位，看是否满足奇校验，如果是，则成功纠正一位错误，如果不满足奇校验，说明发生了两位错误，无法纠正。  </p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>汉明码</div>
+      <div>https://blog.geniucker.top/2023/05/05/汉明码/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Geniucker</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 5, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/09/%E9%AB%98%E4%B8%AD%E7%94%9F%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84%E5%BC%B9%E7%B0%A7%E6%8C%AF%E5%AD%90%E7%AE%80%E8%B0%90%E8%BF%90%E5%8A%A8%E9%80%9A%E8%A7%A3%E6%8E%A8%E5%AF%BC/" title="高中生都能看懂的弹簧振子简谐运动通解推导">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">高中生都能看懂的弹簧振子简谐运动通解推导</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/01/Subscription-Converter-for-Clash-%E4%B8%80%E4%B8%AA%E6%98%93%E4%BA%8E%E9%83%A8%E7%BD%B2%E7%9A%84Clash%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/" title="Subscription Converter for Clash - 一个易于部署的Clash订阅转换">
+                        <span class="hidden-mobile">Subscription Converter for Clash - 一个易于部署的Clash订阅转换</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"e2869988ac40d1373f3f","clientSecret":"6ce3ad433a0c2ff750a5c1fd68bf322c0a96532f","repo":"gitalk-commnet","owner":"Geniucker","admin":["Geniucker"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","option":null},
+          {
+            id: '1c88b1f557cc9781789ced717f859407'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

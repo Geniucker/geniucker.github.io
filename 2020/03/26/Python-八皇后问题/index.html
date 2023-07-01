@@ -1,0 +1,744 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="https://source.geniucker.top/logo/favicon-32x32-next.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Geniucker">
+  <meta name="keywords" content="笔记,技术,随笔">
+  
+    <meta name="description" content="&amp;emsp;&amp;emsp;八皇后问题，是一个古老而著名的问题，是回溯算法的典型案例。该问题是国际西洋棋棋手马克斯·贝瑟尔于1848年提出：在8×8格的国际象棋上摆放八个皇后，使其不能互相攻击，即任意两个皇后都不能处于同一行、同一列或同一斜线上，问有多少种摆法。 高斯认为有76种方案。1854年在柏林的象棋杂志上不同的作者发表了40种不同的解，后来有人用图论的方法解出92种结果。计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 八皇后问题">
+<meta property="og:url" content="https://blog.geniucker.top/2020/03/26/Python-%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Geniucker&#39;s Blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;八皇后问题，是一个古老而著名的问题，是回溯算法的典型案例。该问题是国际西洋棋棋手马克斯·贝瑟尔于1848年提出：在8×8格的国际象棋上摆放八个皇后，使其不能互相攻击，即任意两个皇后都不能处于同一行、同一列或同一斜线上，问有多少种摆法。 高斯认为有76种方案。1854年在柏林的象棋杂志上不同的作者发表了40种不同的解，后来有人用图论的方法解出92种结果。计">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-26T06:25:59.000Z">
+<meta property="article:modified_time" content="2020-03-26T06:25:59.000Z">
+<meta property="article:author" content="Geniucker">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="八皇后问题">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python 八皇后问题 - Geniucker&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.geniucker.top","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Geniucker&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python 八皇后问题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Geniucker
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-03-26 14:25" pubdate>
+          March 26, 2020 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python 八皇后问题</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;八皇后问题，是一个古老而著名的问题，是回溯算法的典型案例。该问题是国际西洋棋棋手马克斯·贝瑟尔于1848年提出：在8×8格的国际象棋上摆放八个皇后，使其不能互相攻击，即任意两个皇后都不能处于同一行、同一列或同一斜线上，问有多少种摆法。 高斯认为有76种方案。1854年在柏林的象棋杂志上不同的作者发表了40种不同的解，后来有人用图论的方法解出92种结果。计算机发明后，有多种计算机语言可以解决此问题。<p align="right">——百度百科</p></p>
+</blockquote>
+<p>这是上学期学Python的时候老师留给我们的一个思考题，一开始我和我一个同学是这么写的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python">k=<span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">9</span>):<br>    a==a<br>    <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">9</span>):<br>        <span class="hljs-keyword">if</span> b==a <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(b-a)==<span class="hljs-number">1</span>):<span class="hljs-keyword">continue</span><br>        <span class="hljs-keyword">else</span>:<br>            b==b<br>            <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">9</span>):<br>                <span class="hljs-keyword">if</span> c==b <span class="hljs-keyword">or</span> c==a <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(c-b)==<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(c-a)==<span class="hljs-number">2</span>):<span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">else</span>:<br>                    c==c<br>                    <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">9</span>):<br>                        <span class="hljs-keyword">if</span> d==c <span class="hljs-keyword">or</span> d==b <span class="hljs-keyword">or</span> d==a <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(d-c)==<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(d-b)==<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(d-a)==<span class="hljs-number">3</span>):<span class="hljs-keyword">continue</span><br>                        <span class="hljs-keyword">else</span>:<br>                            d==d<br>                            <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">9</span>):<br>                                <span class="hljs-keyword">if</span> e==d <span class="hljs-keyword">or</span> e==c <span class="hljs-keyword">or</span> e==b <span class="hljs-keyword">or</span> e==a <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(e-d)==<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(e-c)==<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(e-b)==<span class="hljs-number">3</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(e-a)==<span class="hljs-number">4</span>):<span class="hljs-keyword">continue</span><br>                                <span class="hljs-keyword">else</span>:<br>                                    e==e<br>                                    <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">9</span>):<br>                                        <span class="hljs-keyword">if</span> f==e <span class="hljs-keyword">or</span> f==d <span class="hljs-keyword">or</span> f==c <span class="hljs-keyword">or</span> f==b <span class="hljs-keyword">or</span> f==a <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(f-e)==<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(f-d)==<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(f-c)==<span class="hljs-number">3</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(f-b)==<span class="hljs-number">4</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(f-a)==<span class="hljs-number">5</span>):<span class="hljs-keyword">continue</span><br>                                        <span class="hljs-keyword">else</span>:<br>                                            f==f<br>                                            <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">9</span>):<br>                                                <span class="hljs-keyword">if</span> g==f <span class="hljs-keyword">or</span> g==e <span class="hljs-keyword">or</span> g==d <span class="hljs-keyword">or</span> g==c <span class="hljs-keyword">or</span> g==b <span class="hljs-keyword">or</span> g==a <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(g-f)==<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(g-e)==<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>( g-d)==<span class="hljs-number">3</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(g-c)==<span class="hljs-number">4</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(g-b)==<span class="hljs-number">5</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(g-a)==<span class="hljs-number">6</span>):<span class="hljs-keyword">continue</span><br>                                                <span class="hljs-keyword">else</span>:<br>                                                    g==g<br>                                                    <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">9</span>):<br>                                                        <span class="hljs-keyword">if</span> h==g <span class="hljs-keyword">or</span> h==f <span class="hljs-keyword">or</span> h==e <span class="hljs-keyword">or</span> h==d <span class="hljs-keyword">or</span> h==c <span class="hljs-keyword">or</span> h==b <span class="hljs-keyword">or</span> h==a <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(h-g)==<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(h-f)==<span class="hljs-number">2</span>)  <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(h-e)==<span class="hljs-number">3</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(h-d)==<span class="hljs-number">4</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(h-c)==<span class="hljs-number">5</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(h-b)== <span class="hljs-number">6</span>) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">abs</span>(h-a)==<span class="hljs-number">7</span>):<span class="hljs-keyword">continue</span><br>                                                        <span class="hljs-keyword">else</span>:<br>                                                            h==h<br>                                                            k+=<span class="hljs-number">1</span><br>                                                            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;result&#x27;</span>,k,<span class="hljs-string">&#x27;:&#x27;</span>,<span class="hljs-string">&#x27;(1,&#x27;</span>,a,<span class="hljs-string">&#x27;),(2,&#x27;</span>,b,<span class="hljs-string">&#x27;),(3,&#x27;</span>,c,<span class="hljs-string">&#x27;),(4,&#x27;</span>,d,<span class="hljs-string">&#x27;),(5,&#x27;</span>,e,<span class="hljs-string">&#x27;),(6,&#x27;</span>,f,<span class="hljs-string">&#x27;),(7,&#x27;</span>,g,<span class="hljs-string">&#x27;),(8,&#x27;</span>,h,<span class="hljs-string">&#x27;)&#x27;</span>)<br><br></code></pre></td></tr></table></figure>
+<p>这显然是我们初学者最容易想到的一种办法。由于“学业比较繁忙”，当时一直没有去思考更好的实现，直到现在才重新开始思考这个问题。从原程序看，循环嵌套了8次，由此我想到（网上看到的）让函数自己调用自己——递归。</p>
+<p>整体思路：N皇后问题每行有且仅有一个皇后，用数组（Python只能列表）表示皇后的坐标（下标为行，至为列，为了方便第一行下标仍为0），在每一行都要用循环分别判断是否与前面任意一行在同一列或同一斜排，都满足条件进入下一行，直到行数&#x3D;N进行输出。下面给出代码（为了方便注释，有些可以合并的地方我分行写了）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python">num=<span class="hljs-number">0</span> <span class="hljs-comment">#用来计数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">huangHou</span>(<span class="hljs-params">A,hang=<span class="hljs-number">0</span></span>):<span class="hljs-comment">#A是一个列表，hang表示第n行</span><br>    <span class="hljs-keyword">global</span> num<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(A)==hang:<span class="hljs-comment">#递归终止条件</span><br>        num += <span class="hljs-number">1</span><br>        <span class="hljs-built_in">print</span>(num,end=<span class="hljs-string">&#x27;：&#x27;</span>)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(A)):<span class="hljs-comment">#坐标形式输出</span><br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;(&#x27;</span>+<span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)+<span class="hljs-string">&#x27;,&#x27;</span>+<span class="hljs-built_in">str</span>(A[i])+<span class="hljs-string">&#x27;)&#x27;</span>,end=<span class="hljs-string">&#x27;&#x27;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br>        <span class="hljs-keyword">return</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(A)):<span class="hljs-comment">#遍历第hang行的每一个位置</span><br>            tem = <span class="hljs-literal">True</span><span class="hljs-comment">#用于标记是否满足条件</span><br>            A[hang] = i<span class="hljs-comment">#填入列表</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(hang):<span class="hljs-comment">#判断两个条件</span><br>                <span class="hljs-keyword">if</span> (A[j]==A[hang])<span class="hljs-keyword">or</span>(<span class="hljs-built_in">abs</span>(A[j]-A[hang])==hang-j):<br>                    tem = <span class="hljs-literal">False</span><br>                    <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">if</span> tem:huangHou(A,hang+<span class="hljs-number">1</span>)<span class="hljs-comment">#若满足条件，进入下一行</span><br>huangHou([<span class="hljs-literal">None</span>]*<span class="hljs-number">8</span>)<span class="hljs-comment">#只要填入有N个元素的列表即可解决N皇后问题</span><br><br></code></pre></td></tr></table></figure>
+<p>这样不但结构清晰还简短了许多。<br>本人小白一只，若有错误欢迎在评论区留言指正（最好留下邮箱方便联系）</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+      
+        <a href="/tags/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/">#八皇后问题</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python 八皇后问题</div>
+      <div>https://blog.geniucker.top/2020/03/26/Python-八皇后问题/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Geniucker</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 26, 2020</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/29/Chrome%E5%B0%8F%E6%8A%80%E5%B7%A7%EF%BC%9A%E8%AE%A9%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E7%9A%84%E6%90%9C%E7%B4%A2%E6%A1%86%E5%8F%98%E6%88%90%E7%9C%9F%E7%9A%84/" title="Chrome小技巧：让新标签页的搜索框变成真的">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Chrome小技巧：让新标签页的搜索框变成真的</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/25/Python-pip-%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E6%BA%90/" title="Python pip 使用国内源">
+                        <span class="hidden-mobile">Python pip 使用国内源</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"e2869988ac40d1373f3f","clientSecret":"6ce3ad433a0c2ff750a5c1fd68bf322c0a96532f","repo":"gitalk-commnet","owner":"Geniucker","admin":["Geniucker"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","option":null},
+          {
+            id: '4a3dd42e6342eec0d0c6afa4fb0e7b4b'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

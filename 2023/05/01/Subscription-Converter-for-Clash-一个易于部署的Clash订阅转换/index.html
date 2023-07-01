@@ -1,0 +1,789 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="https://source.geniucker.top/logo/favicon-32x32-next.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Geniucker">
+  <meta name="keywords" content="笔记,技术,随笔">
+  
+    <meta name="description" content="自己的项目别人都发完博客了结果自己还没发过233，还是稍微记录一下   当前功能现在又两个分支 (但是由于某些原因我把他们分成了两个仓库)  通用版（适合所有Clash用户）: https:&#x2F;&#x2F;github.com&#x2F;geniucker&#x2F;sub-conv   ZJU专版: https:&#x2F;&#x2F;github.com&#x2F;geniucker&#x2F;sub-conv-4-ZJU  通用版本功能：  一个可以勉强能看的订">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Subscription Converter for Clash - 一个易于部署的Clash订阅转换">
+<meta property="og:url" content="https://blog.geniucker.top/2023/05/01/Subscription-Converter-for-Clash-%E4%B8%80%E4%B8%AA%E6%98%93%E4%BA%8E%E9%83%A8%E7%BD%B2%E7%9A%84Clash%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="Geniucker&#39;s Blog">
+<meta property="og:description" content="自己的项目别人都发完博客了结果自己还没发过233，还是稍微记录一下   当前功能现在又两个分支 (但是由于某些原因我把他们分成了两个仓库)  通用版（适合所有Clash用户）: https:&#x2F;&#x2F;github.com&#x2F;geniucker&#x2F;sub-conv   ZJU专版: https:&#x2F;&#x2F;github.com&#x2F;geniucker&#x2F;sub-conv-4-ZJU  通用版本功能：  一个可以勉强能看的订">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-01T03:21:31.000Z">
+<meta property="article:modified_time" content="2023-05-06T05:47:00.000Z">
+<meta property="article:author" content="Geniucker">
+<meta property="article:tag" content="Clash">
+<meta property="article:tag" content="订阅转换">
+<meta property="article:tag" content="subconverter">
+<meta property="article:tag" content="subscription">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Subscription Converter for Clash - 一个易于部署的Clash订阅转换 - Geniucker&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.geniucker.top","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Geniucker&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Subscription Converter for Clash - 一个易于部署的Clash订阅转换"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Geniucker
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-01 11:21" pubdate>
+          May 1, 2023 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Subscription Converter for Clash - 一个易于部署的Clash订阅转换</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    Last updated on May 6, 2023 pm
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>自己的项目别人都发完博客了结果自己还没发过233，还是稍微记录一下  </p>
+<h2 id="当前功能"><a href="#当前功能" class="headerlink" title="当前功能"></a>当前功能</h2><p>现在又两个分支 (但是由于某些原因我把他们分成了两个仓库)</p>
+<ul>
+<li>通用版（适合所有Clash用户）: <a target="_blank" rel="noopener" href="https://github.com/geniucker/sub-conv">https://github.com/geniucker/sub-conv</a>  </li>
+<li>ZJU专版: <a target="_blank" rel="noopener" href="https://github.com/geniucker/sub-conv-4-ZJU">https://github.com/geniucker/sub-conv-4-ZJU</a></li>
+</ul>
+<p>通用版本功能：</p>
+<ul>
+<li>一个可以勉强能看的订阅转换 Web-UI (感谢 <a target="_blank" rel="noopener" href="https://github.com/musanico">@Musanico</a>)  </li>
+<li>大体基于 ACL 的规则  </li>
+<li>基于 Provider 的节点自动更新  </li>
+<li>（为土豪）多机场用户提供了支持  </li>
+<li>剩余流量和总流量的显示（单机场的时候才有用，需要你的机场和你用的Clash同时支持，已知Clash for Windows, Clash Verge, Stash, Clash Meta for Android等已支持）  </li>
+<li>实现了 clash 订阅转换 proxy-provider 的 api, (一般人也不会去用吧), 不再依赖 Proxy Provider Converter , 用法&lt;网页根目录&gt;&#x2F;provider?url&#x3D;&lt;你的订阅&gt;,例如上面给出的示例,地址为<a target="_blank" rel="noopener" href="https://sub-converter.geniucker.top/provider?url=">https://sub-converter.geniucker.top/provider?url=</a>&lt;你的订阅&gt;,&lt;你的订阅&gt;自行替换  </li>
+<li>支持配置文件 (config.py，之后说不定会写subconverter配置到本项目的转换)</li>
+</ul>
+<p>ZJU专版在通用版的基础上增加了：</p>
+<ul>
+<li>对<a target="_blank" rel="noopener" href="https://github.com/Mythologyli/ZJU-Connect/">ZJU Connect</a>的支持  </li>
+<li>包括了ZJU专用规则 (来自<a target="_blank" rel="noopener" href="https://github.com/Mythologyli/ZJU-Rule/">ZJU-Rule</a>)</li>
+</ul>
+<h2 id="项目缘起"><a href="#项目缘起" class="headerlink" title="项目缘起"></a>项目缘起</h2><p><del>高考前两个月太空</del><br>一直在担心公共订阅转换的安全性问题。已开始我看到了 <a target="_blank" rel="noopener" href="https://github.com/tindy2013/subconverter">subconverter</a> ，但是当时身无分文，只能部署在 <a target="_blank" rel="noopener" href="https://vercel.com/">Vercel</a> 这样的 Serverless Function 里。但是由于 subconverter 是用 C++ 写的，无法在 Vercel 上部署（曾经可以部署可执行文件，但是我死活弄不出来），所以就有了自己写订阅转换的想法。  </p>
+<h2 id="初始想法"><a href="#初始想法" class="headerlink" title="初始想法"></a>初始想法</h2><ol>
+<li>我需要用 Linux，我需要解决节点自动更新的问题，这个可以用Clash的proxy-provider解决  </li>
+<li>暂时只要支持我当时所用的一元只因厂就可以了，如果做一个通用型的Clash订阅转换太复杂了(即使只是Clash到Clash的转换)，所以我硬编码了大部分内容，连地区分组都是硬编码的，这会导致问题，之后会说</li>
+</ol>
+<h2 id="初步实现"><a href="#初步实现" class="headerlink" title="初步实现"></a>初步实现</h2><p>Vercel 的 Serverless Function 支持 Node.js, Go, Python, Ruby，显然我只会 Python，而且刚好之前摸过一点点 <a target="_blank" rel="noopener" href="https://flask.palletsprojects.com/">Flask</a> ，所以就用了 Flask。<br>初代的文件结构主要是这样的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell">.<br>│  base.py                  #包含了拉取规则的函数<br>│  head.py                  #硬编码的配置文件组成部分，包括了地区分组等 <br>│  index.py                 #这个api的主程序<br>│  requirements.txt         #python模块依赖列表<br>│  ruleList.py              #规则来源列表<br>│  vercel.json              #vercel配置文件<br>│<br>├─static                    #静态网页的js，用来渲染Markdown<br>│  └─js<br>│          markdeep.min.js<br>│<br>└─templates                 #静态网页，一个简单的首页，用于引导<br>        index.html<br></code></pre></td></tr></table></figure>
+<p>当时的流程非常简单：用户发起get请求，服务端拉取规则，生成proxy-provider的部分，再和其他硬编码的部分进行拼接，就可以返回给用户了。  </p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>可以欣赏一下我硬编码的屎山代码：<a target="_blank" rel="noopener" href="https://github.com/Geniucker/sub-conv/tree/a4b4ed09956f5c55442a4e365d7f58192d5059b6">https://github.com/Geniucker/sub-conv/tree/a4b4ed09956f5c55442a4e365d7f58192d5059b6</a>，这个代码简单到你一看就知道我在干嘛(特别是<code>head.py</code>文件)<br>最大的问题就在于我硬编码了大部分内容，这会导致很多问题：</p>
+<ol>
+<li>虽然开始的时候一元的节点配置很稳定，节点的地区基本不变，但是到后来他频繁的增删节点，例如美国节点时有时无。在美国节点消失的时候，由于地区组是通过provider的filter匹配出来的，如果匹配不到就会报错。而我只能通过改代码来解决这个问题。  </li>
+<li>我有使用多个只因厂的需求，在硬编码的情况下，这极难实现  </li>
+<li>维护困难</li>
+</ol>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>要解决这些问题，只有一个办法：重构除了拉取规则以外的几乎所有部分<a target="_blank" rel="noopener" href="https://github.com/Geniucker/sub-conv/commit/e48bbc64257be11c77abcc8b06853888bcf4a98f">https://github.com/Geniucker/sub-conv/commit/e48bbc64257be11c77abcc8b06853888bcf4a98f</a> (这次提交好像还是有bug的)<br>于是我直接做了一个通用型的Clash订阅转换<br>主要的工作流程是这样的：用户发起get请求-&gt;服务端获取节点信息，生成地区分组-&gt;获取规则-&gt;生成其他部分并拼接-&gt;返回给用户<br>那么到这里之后其实功能已经实现的大差不差了，但是还是没有实现多只因厂，也发现了别的问题：调整规则组还是要修改代码，对用户不友好;用户每次请求接口都需要拉取一次规则，很长的时间花在网络上，所有就想着弄缓存。<br>于是，我事先了如下内容：</p>
+<ul>
+<li>多只因厂支持  </li>
+<li>配置文件  </li>
+<li>使用 GitHub Action 定时拉取一次规则然后缓存到仓库里<del>（这会导致一个问题，fork仓库的自动更新规则产生的提交会和我都仓库的提交产生冲突导致无法拉取上游更新，我还不知道怎么解决。<em><strong>要是你知道如何解决请务必联系我</strong></em>）</del>已解决这个问题</li>
+</ul>
+<p>之后还遇到了 Vercel 用量告急的问题，这是因为请求太多了。在早先的实现里，我为每个地区的组单独开了provider，每个provider都会分别发出请求以拉取节点更新。在得知meta内核支持组内filter之后，提供了meta内核的选项，这样就可以每个只因厂只用一个provider然后在分组里面再匹配出对应地区的节点。  </p>
+<h2 id="当前支持的功能"><a href="#当前支持的功能" class="headerlink" title="当前支持的功能"></a>当前支持的功能</h2><p>综上，目前我实现了如下功能</p>
+<ul>
+<li>一个可以勉强能看的订阅转换 Web-UI (感谢 <a target="_blank" rel="noopener" href="https://github.com/musanico">@Musanico</a>)  </li>
+<li>大体基于 ACL 的规则（包括了ZJU专用规则）  </li>
+<li>基于 Provider 的节点自动更新  </li>
+<li>对ZJU Connect的支持  </li>
+<li>多只因厂支持  </li>
+<li>剩余流量和总流量的显示（单机场的时候才有用，需要你的机场和你用的Clash同时支持，已知Clash for Windows, Clash Verge, Stash, Clash Meta for Android等已支持）  </li>
+<li>实现了 clash 订阅转换 proxy-provider 的 api（以前是使用别人的api）  </li>
+<li>支持配置文件 (<code>config.py</code>)</li>
+</ul>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>请查阅 <a target="_blank" rel="noopener" href="https://github.com/geniucker/sub-conv/wiki">Wiki</a><br>虽然使用英文写的，但是我懒得用中文再写一遍了  </p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF/" class="category-chain-item">技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Clash/">#Clash</a>
+      
+        <a href="/tags/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/">#订阅转换</a>
+      
+        <a href="/tags/subconverter/">#subconverter</a>
+      
+        <a href="/tags/subscription/">#subscription</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Subscription Converter for Clash - 一个易于部署的Clash订阅转换</div>
+      <div>https://blog.geniucker.top/2023/05/01/Subscription-Converter-for-Clash-一个易于部署的Clash订阅转换/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Geniucker</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 1, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/05/%E6%B1%89%E6%98%8E%E7%A0%81/" title="汉明码">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">汉明码</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/22/%E5%86%8D%E8%AE%B0Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/" title="再记Hexo博客部署">
+                        <span class="hidden-mobile">再记Hexo博客部署</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"e2869988ac40d1373f3f","clientSecret":"6ce3ad433a0c2ff750a5c1fd68bf322c0a96532f","repo":"gitalk-commnet","owner":"Geniucker","admin":["Geniucker"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","option":null},
+          {
+            id: '077d0dfbf7f939f92f4df1b080074f03'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
